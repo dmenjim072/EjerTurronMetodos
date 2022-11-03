@@ -20,7 +20,8 @@ public class EjerMetodosTurron {
     }
 
     // Metodos   
-    public static void mostrarMenu() {//metodo para solo mostrar el menu inicial
+    //metodo para solo mostrar el menu inicial
+    public static void mostrarMenu() {
         String palabra;
         // Creacion menu de dos opciones (ENTRAR o SALIR)
         do {
@@ -34,7 +35,7 @@ public class EjerMetodosTurron {
                     leerCodigos();
                     break;
                 case "SALIR":
-                    JOptionPane.showMessageDialog(null, "");
+                    JOptionPane.showMessageDialog(null, "Hasta luego");
             }
 
             // Hacemos la condicion del primer bucle para que salga si escribimos "salir"
@@ -42,7 +43,8 @@ public class EjerMetodosTurron {
 
     }
 
-    public static void leerCodigos() {//metodo para leer el codigo del producto
+    //metodo para leer el codigo del producto y filtrarlo
+    public static void leerCodigos() {
         String codProducto = "";
 
         // Hacemos un bucle para que si el usuario introduce un codigo
@@ -78,9 +80,10 @@ public class EjerMetodosTurron {
                 || codProducto.equalsIgnoreCase("SALIR")));
     }
 
+    //metodo para hacer los calculos dentro de cada codigo
     public static void filtrarCodigos(String codProducto, final double MANO_OBRA_M1_T1,
             final double BENEFICIO_M1_M2_P1, final double BENEFICIO_VENTAS, double materiaPrima,
-            final double MANO_OBRA_M2_T2_P1, final double BENEFICIO_T1_T2) {//metodo para filtrar el codigo  ---
+            final double MANO_OBRA_M2_T2_P1, final double BENEFICIO_T1_T2) {
         String resultado;
         //algoritmo
         switch (codProducto) {
@@ -187,7 +190,8 @@ public class EjerMetodosTurron {
         }
     }
 
-    public static void leerMateriaPrima(String codProducto) {//metodo para leer el precio de la materia prima
+    //metodo para leer el precio de la materia prima
+    public static void leerMateriaPrima(String codProducto) {
 
         double materiaPrima = 0;
         final double LIMITE_INFERIOR = 0.1;
@@ -232,4 +236,28 @@ public class EjerMetodosTurron {
         return costeManoObra1;
     }
 
+    //Metodo para calcular los costes de produccion
+    public static void calcularCosteProd(final double MANO_OBRA_M1_T1, 
+            final double MANO_OBRA_M2_T2_P1, double materiaPrima){
+        
+        double costeProdM1 = MANO_OBRA_M1_T1 + materiaPrima;
+        double costeProdM2 = MANO_OBRA_M2_T2_P1 + materiaPrima;
+        double costeProdP1 = MANO_OBRA_M2_T2_P1 + materiaPrima;
+        double costeProdT1 = MANO_OBRA_M1_T1 + materiaPrima;
+        double costeProdT2 = MANO_OBRA_M2_T2_P1 + materiaPrima;
+             
+        }
+    //Metodo para calcular PrecioVentaUnitario
+    public static void calcularPrecioVentaUnitario(double costeProdM1, double costeProdM2,
+            double costeProdP1, double costeProdT1, double costeProdT2, final double BENEFICIO_M1_M2_P1,
+            final double BENEFICIO_T1_T2){
+        
+        double precioVentaM1 = costeProdM1 + (BENEFICIO_M1_M2_P1 * costeProdM1);
+        double precioVentaM2 = costeProdM2 + (BENEFICIO_M1_M2_P1 * costeProdM2);
+        double precioVentaP1 = costeProdP1 + (BENEFICIO_M1_M2_P1 * costeProdP1);
+        double precioVentaT1 = costeProdT1 + (BENEFICIO_T1_T2 * costeProdT1);
+        double precioVentaT2 = costeProdT2 + (BENEFICIO_T1_T2 * costeProdT2);
+    }
 }
+
+    
